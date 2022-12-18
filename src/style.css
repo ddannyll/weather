@@ -3,6 +3,7 @@
 * {
     margin: 0;
     padding: 0;
+    border: 0;
 }
 
 
@@ -37,7 +38,8 @@ body {
     position: absolute;
     bottom: 5%;
     left: 5%;
-    text-shadow: 2px 2px 50px #222;
+    -webkit-filter: drop-shadow(2px 2px 10px #333);
+    filter: drop-shadow(2px 2px 10px #333);
 }
 
 #icon {
@@ -77,3 +79,45 @@ body {
     font-size: 1rem;
 }
 
+#search {
+    position: absolute;
+    right: 0;
+    -webkit-filter: drop-shadow(2px 2px 10px #333);
+    filter: drop-shadow(2px 2px 10px #333);
+}
+
+.searchInput, #search>button {
+    border: none;
+    background: rgba(255, 255, 255, 0.26);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8.9px);
+    -webkit-backdrop-filter: blur(8.9px);
+}
+
+
+.searchInput {
+    width: 300px;
+    font-size: 2rem;
+    padding: 20px;
+    color: white;
+}
+
+.searchInput:focus {
+    outline: none;
+}
+
+#search>button {
+    font-size: 2rem;
+    padding: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+#search>button>* {
+    transition: transform 200ms;
+}
+
+
+#search>button:hover>* {
+    transform: scale(1.1);
+}

@@ -1,9 +1,6 @@
 import './style.css'
 import { DateTime } from "luxon"
 import { createClient } from 'pexels'
-import Rain from './images/rain.jpg'
-
-const backgroundCache = {}
 
 const API_KEY = 'bd912bf06046730bb768e35c45a05452' // free plan idc
 const pexelsClient = createClient('563492ad6f91700001000001b6d9c1fa4e1448ca970a28099190f95d')
@@ -49,16 +46,15 @@ document.body.addEventListener('mouseout', () => {
 const retrieveWeatherObject = async (cityQuery) => {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityQuery}&appid=${API_KEY}`
     const response = await fetch(url, {mode:'cors'})
+        .then()
     if (!response.ok) {
         throw new Error('Failed to search')
     }
     const responseJson = await response.json()
-    console.log(responseJson);
     return new Weather(responseJson)
 }
 
 const buildWeatherCard = (weather) => {
-    console.log(weather);
     const tempElem = document.getElementById('temp')
     const locationElem = document.getElementById('location')
     const timeElem = document.getElementById('time')
@@ -85,7 +81,6 @@ const setBackground = async (search) => {
         const response = await pexelsClient.photos.search({query:search, orientation: 'landscape', per_page:5})
         console.log('pexels', search);
         const photoURLs = response.photos.map(photo => photo.src.large2x)
-        console.log(photoURLs);
         localStorage.setItem(search, JSON.stringify(photoURLs))
     } 
     const photoList = JSON.parse(localStorage.getItem(search))
@@ -97,13 +92,15 @@ const setBackground = async (search) => {
 const searchForm = document.getElementById('search')
 searchForm.addEventListener('submit', (e) => {
     e.preventDefault()
-    const searchQuery = searchForm.querySelector('input').value
+    const searchQuery = searchForm.querySelector('input[type="text"]').value
     retrieveWeatherObject(searchQuery)
     .then((weather) => {
         buildWeatherCard(weather)
         setBackground(weather.mainDescription)
     })
-    .catch(console.err)
+    .catch((err)=>{
+        alert(err)
+    })
 })
 
 retrieveWeatherObject('sydney').then((weather) => {
