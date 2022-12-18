@@ -38,8 +38,8 @@ body {
     position: absolute;
     bottom: 5%;
     left: 5%;
-    -webkit-filter: drop-shadow(2px 2px 10px #333);
-    filter: drop-shadow(2px 2px 10px #333);
+    -webkit-filter: drop-shadow(2px 2px 10px #555);
+    filter: drop-shadow(2px 2px 10px #555);
 }
 
 #icon {
@@ -82,8 +82,10 @@ body {
 #search {
     position: absolute;
     right: 0;
-    -webkit-filter: drop-shadow(2px 2px 10px #333);
-    filter: drop-shadow(2px 2px 10px #333);
+}
+
+#search>* {
+    text-shadow: 2px 2px 20px #555;
 }
 
 .searchInput, #search>button {
